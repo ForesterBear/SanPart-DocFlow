@@ -3,6 +3,9 @@ import jwt from 'jsonwebtoken';
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     let token = req.headers['authorization']?.split(' ')[1];
+    if (!token && req.cookies && req.cookies.token) {
+        token = req.cookies.token;
+    }
     if (!token && req.session && req.session.token) {
         token = req.session.token;
     }

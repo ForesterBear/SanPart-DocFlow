@@ -17,8 +17,9 @@ class AuthController {
         const user = await UserModel.create({ username, password: hashedPassword, role });
         // Створюємо токен одразу після реєстрації
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
-        req.session.token = token;
-        res.redirect('/home');
+    req.session.token = token;
+    res.cookie('token', token, { httpOnly: true });
+    res.redirect('/home');
     }
 
     async login(req: Request, res: Response) {
@@ -36,6 +37,7 @@ class AuthController {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
     // Зберігаємо токен у сесії
     req.session.token = token;
+    res.cookie('token', token, { httpOnly: true });
     res.redirect('/home');
     }
 }

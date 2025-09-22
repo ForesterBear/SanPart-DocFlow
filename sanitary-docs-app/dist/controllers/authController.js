@@ -31,6 +31,7 @@ class AuthController {
             // Створюємо токен одразу після реєстрації
             const token = jsonwebtoken_1.default.sign({ id: user._id }, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
             req.session.token = token;
+            res.cookie('token', token, { httpOnly: true });
             res.redirect('/home');
         });
     }
@@ -49,6 +50,7 @@ class AuthController {
             const token = jsonwebtoken_1.default.sign({ id: user._id }, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
             // Зберігаємо токен у сесії
             req.session.token = token;
+            res.cookie('token', token, { httpOnly: true });
             res.redirect('/home');
         });
     }

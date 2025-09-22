@@ -7,6 +7,9 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const authMiddleware = (req, res, next) => {
     var _a;
     let token = (_a = req.headers['authorization']) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
+    if (!token && req.cookies && req.cookies.token) {
+        token = req.cookies.token;
+    }
     if (!token && req.session && req.session.token) {
         token = req.session.token;
     }
