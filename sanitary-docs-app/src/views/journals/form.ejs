@@ -1,0 +1,17 @@
+<%- include('../layouts/main') %>
+<h1><%= journal ? 'Редагування запису' : 'Новий запис' %></h1>
+<form action="<%= journal ? '/journals/' + journal._id + '?_method=PUT' : '/journals' %>" method="POST">
+    <label>ПІБ: <input type="text" name="patientFullName" value="<%= journal ? journal.patientFullName : '' %>" required></label><br>
+    <label>Рік народження: <input type="number" name="yearOfBirth" value="<%= journal ? journal.yearOfBirth : '' %>" required></label><br>
+    <label>Звання: <input type="text" name="rank" value="<%= journal ? journal.rank : '' %>" required></label><br>
+    <label>Підрозділ: <input type="text" name="unit" value="<%= journal ? journal.unit : '' %>" required></label><br>
+    <label>Діагноз: <input type="text" name="diagnosis" value="<%= journal ? journal.diagnosis : '' %>" required></label><br>
+    <label>Дата надходження: <input type="date" name="dateOfAdmission" value="<%= journal && journal.dateOfAdmission ? journal.dateOfAdmission.toISOString().slice(0,10) : '' %>" required></label><br>
+    <label>Дата вибуття: <input type="date" name="dateOfDischarge" value="<%= journal && journal.dateOfDischarge ? journal.dateOfDischarge.toISOString().slice(0,10) : '' %>"></label><br>
+    <label>Переведено до госпіталю: <input type="text" name="transferredToHospital" value="<%= journal ? journal.transferredToHospital : '' %>"></label><br>
+    <label>Примітки: <textarea name="notes"><%= journal ? journal.notes : '' %></textarea></label><br>
+    <button type="submit"><%= journal ? 'Оновити' : 'Додати' %></button>
+</form>
+<a href="/journals">Назад до списку</a>
+</body>
+</html>

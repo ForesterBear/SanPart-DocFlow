@@ -1,0 +1,37 @@
+<%- include('../layouts/main') %>
+<h1>Журнал пацієнтів</h1>
+<a href="/journals/new">Додати запис</a>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ПІБ</th>
+            <th>Рік народження</th>
+            <th>Звання</th>
+            <th>Підрозділ</th>
+            <th>Діагноз</th>
+            <th>Дата надходження</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% journals.forEach(function(journal) { %>
+            <tr>
+                <td><%= journal.patientFullName %></td>
+                <td><%= journal.yearOfBirth %></td>
+                <td><%= journal.rank %></td>
+                <td><%= journal.unit %></td>
+                <td><%= journal.diagnosis %></td>
+                <td><%= journal.dateOfAdmission ? journal.dateOfAdmission.toISOString().slice(0,10) : '' %></td>
+                <td>
+                    <a href="/journals/<%= journal._id %>">Деталі</a> |
+                    <a href="/journals/edit/<%= journal._id %>">Редагувати</a> |
+                    <form action="/journals/<%= journal._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit">Видалити</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Entries</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Journal Entries</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date of Admission</th>
+                    <th>Patient Name</th>
+                    <th>Year of Birth</th>
+                    <th>Rank</th>
+                    <th>Unit</th>
+                    <th>Diagnosis</th>
+                    <th>Transfer to Hospital</th>
+                    <th>Date of Discharge</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% journals.forEach(journal => { %>
+                    <tr>
+                        <td><%= journal.date_of_admission %></td>
+                        <td><%= journal.patient_name %></td>
+                        <td><%= journal.year_of_birth %></td>
+                        <td><%= journal.rank %></td>
+                        <td><%= journal.unit %></td>
+                        <td><%= journal.diagnosis %></td>
+                        <td><%= journal.transfer_to_hospital ? journal.transfer_to_hospital : 'N/A' %></td>
+                        <td><%= journal.date_of_discharge ? journal.date_of_discharge : 'N/A' %></td>
+                        <td><%= journal.notes ? journal.notes : 'N/A' %></td>
+                        <td>
+                            <a href="/journals/<%= journal._id %>/edit">Edit</a>
+                            <form action="/journals/<%= journal._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="/journals/new" class="btn">Add New Entry</a>
+    </div>
+</body>
+</html>

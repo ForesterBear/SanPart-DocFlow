@@ -1,0 +1,14 @@
+<%- include('../layouts/main') %>
+<h1>Деталі пацієнта</h1>
+<ul>
+    <li><b>ПІБ:</b> <%= journal.patientFullName %></li>
+    <li><b>Рік народження:</b> <%= journal.yearOfBirth %></li>
+    <li><b>Звання:</b> <%= journal.rank %></li>
+    <li><b>Підрозділ:</b> <%= journal.unit %></li>
+    <li><b>Діагноз:</b> <%= journal.diagnosis %></li>
+    <li><b>Дата надходження:</b> <%= journal.dateOfAdmission ? journal.dateOfAdmission.toISOString().slice(0,10) : '' %></li>
+    <li><b>Дата вибуття:</b> <%= journal.dateOfDischarge ? journal.dateOfDischarge.toISOString().slice(0,10) : '' %></li>
+    <li><b>Переведено до госпіталю:</b> <%= journal.transferredToHospital %></li>
+    <li><b>Примітки:</b> <%= journal.notes %></li>
+</ul>
+<a href="/journals">Назад до списку</a>
